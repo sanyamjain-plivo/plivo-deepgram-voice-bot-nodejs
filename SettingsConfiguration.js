@@ -1,28 +1,30 @@
 export const SettingsConfiguration = {
-    "type": "SettingsConfiguration",
-    "audio": {
-      "input": { 
-        "encoding": "mulaw",
-        "sample_rate": 8000
-      },
-      "output": { 
-        "encoding": "mulaw",
-        "sample_rate": 8000,
-        "container": "none",
-        "buffer_size": 250
-      }
+  "type": "Settings",
+  "audio": {
+    "input": {
+      "encoding": "mulaw",
+      "sample_rate": 8000
     },
-    "agent": {
-      "listen": {
-        "model": "nova-2" 
+    "output": {
+      "encoding": "mulaw",
+      "sample_rate": 8000,
+      "container": "none",
+    }
+  },
+  "agent": {
+    "listen": { 
+      "provider": { 
+        "type": "deepgram",
+        "model": "nova-3" 
       },
-      "think": {
-        "provider": {
-          "type": "open_ai" 
-        },
-        "model": "gpt-3.5-turbo", 
-        "instructions": "You are a helpful assistant.", 
-        "functions": [
+    },
+    "think": {
+      "provider": {
+        "type": "open_ai",
+        "model": "gpt-4o-mini" 
+      },
+      "prompt": "You are a helpful assistant.",
+      "functions": [
         {
           "name": "getWeatherFromCityName",
           "description": "Get the weather from the given city name",
@@ -31,16 +33,19 @@ export const SettingsConfiguration = {
             "properties": {
               "city": {
                 "type": "string",
-                "description":"The city name to get the weather from" 
+                "description": "The city name to get the weather from"
               }
             },
             "required": ["city"]
           },
         }
-        ]
-      },
-      "speak": {
-        "model": "aura-asteria-en" 
+      ]
+    },
+    "speak": {
+      "provider": {
+        "type": "deepgram",
+        "model": "aura-asteria-en"
       }
     }
   }
+}
